@@ -1,9 +1,3 @@
-if _G.BoiLockLoaded then
-    warn("BoiLock already running!")
-    return
-end
-_G.BoiLockLoaded = true
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
