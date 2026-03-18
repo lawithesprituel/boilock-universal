@@ -11,9 +11,20 @@ local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 
 local repo = 'https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/'
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+
+local function safeLoad(url)
+    local ok, result = pcall(function()
+        return loadstring(game:HttpGet(url, true))()
+    end)
+    if not ok or not result then
+        error("Failed to load: " .. url .. "\n" .. tostring(result))
+    end
+    return result
+end
+
+local Library = safeLoad(repo .. 'Library.lua')
+local ThemeManager = safeLoad(repo .. 'addons/ThemeManager.lua')
+local SaveManager = safeLoad(repo .. 'addons/SaveManager.lua')
 
 local Window = Library:CreateWindow({
     Title = 'Boilock Alpha',
@@ -5462,7 +5473,7 @@ Library.OnUnload = function()
         _sRes.w = nil
         _sRes.h = nil
     end
-    
+
     _G.BoiLockLoaded = nil
 end
 
