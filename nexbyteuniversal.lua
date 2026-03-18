@@ -16,7 +16,7 @@ local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
 local Window = Library:CreateWindow({
-    Title = 'Boilock Alpha ',
+    Title = 'Boilock Alpha',
     Center = true,
     AutoShow = false,
     TabPadding = 8,
@@ -2526,7 +2526,9 @@ local function updateColorbot()
     if bestX and bestY then
         local current = UserInputService:GetMouseLocation()
         local delta = Vector2.new(bestX - current.X, bestY - current.Y) / colorbotSmoothing
-        mousemoverel(delta.X, delta.Y)
+        if mousemoverel then
+            mousemoverel(delta.X, delta.Y)
+        end
     end
 end
 
@@ -4715,7 +4717,7 @@ SafeTeleportBox:AddToggle('SafeTeleportEnabled', {
         if v then
             safeTeleportLastPos = nil
             safeTeleportTimer = 0
-            Library:Notify("Safe Teleport: Active — walk on ground to save position", 3)
+            Library:Notify("Safe Teleport: Active - walk on ground to save position", 3)
         end
     end
 })
@@ -5460,7 +5462,7 @@ Library.OnUnload = function()
         _sRes.w = nil
         _sRes.h = nil
     end
-
+    
     _G.BoiLockLoaded = nil
 end
 
